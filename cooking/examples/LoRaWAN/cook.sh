@@ -4,7 +4,7 @@ PWD="$(pwd)"
 cd ..
 cd ..
 BASE_DIR="$(pwd)"
-ARDUPI_DIR="$BASE_DIR/../ArduPi"
+ARDUPI_DIR="$BASE_DIR/../../ArduPi"
 ARDUPIAPI_DIR="$BASE_DIR/arduPi-api"
 EXAMPLES_DIR="$BASE_DIR/examples/LoRaWAN"
 LIBRARY_DIR="$BASE_DIR/libraries/arduPiLoRaWAN"
