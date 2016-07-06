@@ -47,6 +47,8 @@ pthread_t idThread13;
 timeval start_program, end_point;
 
 
+
+
 /*********************************
  *                               *
  * SerialPi Class implementation *
