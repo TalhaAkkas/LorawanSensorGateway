@@ -125,7 +125,7 @@ void loop()
   }
   
 
-  delay(100);
+//  delay(100);
   printf("\nListening to packets...\n");
   
    // rx
