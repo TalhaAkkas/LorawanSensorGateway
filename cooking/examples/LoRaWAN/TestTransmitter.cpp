@@ -26,7 +26,8 @@
  *  Design:            David Gascon
  *  Implementation:    Luismi Marti, Ruben Martin  
  */
-
+#include <stdio.h>
+#include <time.h>
 #include "arduPiLoRaWAN.h"
 
 // socket to use
@@ -40,7 +41,7 @@ uint8_t power = 15;
 uint32_t frequency = 868100000;
 char spreading_factor[] = "sf12";
 char coding_rate[] = "4/5";
-uint16_t bandwidth = 125;
+uint16_t bandwidth = 500;
 char crc_mode[] = "on";
 //////////////////////////////////////////////
 
@@ -76,7 +77,21 @@ void setup()
 
 void loop() 
 {
-  // Send packet
+
+  static int index  = 0;
+  time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  
+  sprintf(data, "%dA%dB%dB%d", index, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  index++;
+  printf("%30s", data);  
+// Send packet
   error = LoRaWAN.sendRadio(data);
   
   // Check status
@@ -86,10 +101,11 @@ void loop()
   }
   else 
   {
+    printf("%s\n", data);
     printf("Error waiting for packets. error = %d\n", error);  
   }
   
-  delay(5);
+  delay(80);
 }
 
 
