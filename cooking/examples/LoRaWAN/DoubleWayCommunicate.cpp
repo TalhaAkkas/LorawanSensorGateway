@@ -34,16 +34,16 @@
 TAILQ_HEAD(tailhead, entry) head;
 
 struct entry {
-  char[] data;
+  char* data;
   TAILQ_ENTRY(entry) entries;
 };
 
-void add_to_queue(char[] ch) {
+void add_to_queue(char* ch) {
   struct entry *elem;
   sprintf(ch, "%30s", ch);
-  elem = malloc(sizeof(struct entry));
+  elem = (entry*) malloc(sizeof(struct entry));
   if (elem) {
-    elem->c = ch;
+    elem->data = ch;
   }
   TAILQ_INSERT_HEAD(&head, elem, entries);
 }
@@ -111,7 +111,7 @@ void fillData()
 void loop() 
 {
   // Send packet
-  fillData()
+  fillData();
   error = LoRaWAN.sendRadio(data);
   
   // Check status
