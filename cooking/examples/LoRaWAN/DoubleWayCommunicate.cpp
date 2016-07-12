@@ -60,7 +60,7 @@ uint8_t power = 15;
 uint32_t frequency = 868100000;
 char spreading_factor[] = "sf7";
 char coding_rate[] = "4/5";
-uint16_t bandwidth = 11000;
+uint16_t bandwidth = 500;
 char crc_mode[] = "on";
 //////////////////////////////////////////////
 
@@ -418,6 +418,26 @@ uint8_t radioModuleSetup()
   }
   printf("-------------------------------------------------------\n");
 
+
+  error = LoRaWAN.setDataRate(6);
+  if( error == 0 ) 
+  {
+    printf("2. Data rate set OK\n");     
+  }
+  else 
+  {
+    printf("2. Data rate set error = %d\n",error); 
+  }
+  error = LoRaWAN.getDataRate();
+  if( error == 0 ) 
+  {
+    printf("3. Data rate get OK.\n");    
+    printf("Data rate index: %d\n",LoRaWAN._dataRate);
+  }
+  else 
+  {
+    printf("3. Data rate set error = %d\n", error); 
+  }
 
   return status;
 }
