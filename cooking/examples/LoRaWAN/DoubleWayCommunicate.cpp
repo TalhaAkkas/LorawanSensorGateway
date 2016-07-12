@@ -124,12 +124,13 @@ void loop()
     printf("Error waiting for packets. error = %d\n", error);  
   }
   
+  delay(150);
 
 //  delay(100);
   printf("\nListening to packets...\n");
   
    // rx
-  error = LoRaWAN.receiveRadio(250);
+  error = LoRaWAN.receiveRadio(10000);
   
   // Check status
   if (error == 0)
@@ -145,7 +146,6 @@ void loop()
     //  2: no incoming packet
     printf("Error waiting for packets. error = %d\n", error);  
   }  
-  delay(150);
 }
 
 
