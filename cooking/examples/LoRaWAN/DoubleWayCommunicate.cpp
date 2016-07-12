@@ -129,7 +129,7 @@ void loop()
   printf("\nListening to packets...\n");
   
    // rx
-  error = LoRaWAN.receiveRadio(10000);
+  error = LoRaWAN.receiveRadio(250);
   
   // Check status
   if (error == 0)
@@ -145,7 +145,7 @@ void loop()
     //  2: no incoming packet
     printf("Error waiting for packets. error = %d\n", error);  
   }  
-  delay(100);
+  delay(150);
 }
 
 
@@ -419,25 +419,6 @@ uint8_t radioModuleSetup()
   printf("-------------------------------------------------------\n");
 
 
-  error = LoRaWAN.setDataRate(6);
-  if( error == 0 ) 
-  {
-    printf("2. Data rate set OK\n");     
-  }
-  else 
-  {
-    printf("2. Data rate set error = %d\n",error); 
-  }
-  error = LoRaWAN.getDataRate();
-  if( error == 0 ) 
-  {
-    printf("3. Data rate get OK.\n");    
-    printf("Data rate index: %d\n",LoRaWAN._dataRate);
-  }
-  else 
-  {
-    printf("3. Data rate set error = %d\n", error); 
-  }
 
   return status;
 }
