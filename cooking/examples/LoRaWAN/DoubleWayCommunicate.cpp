@@ -124,7 +124,6 @@ void loop()
     printf("Error waiting for packets. error = %d\n", error);  
   }
   
-  delay(150);
 
 //  delay(100);
   printf("\nListening to packets...\n");
@@ -145,7 +144,8 @@ void loop()
     //  1: error
     //  2: no incoming packet
     printf("Error waiting for packets. error = %d\n", error);  
-  }  
+  } 
+  delay(150); 
 }
 
 
