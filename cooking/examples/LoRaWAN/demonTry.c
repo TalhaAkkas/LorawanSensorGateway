@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <syslog.h>
+#include "log.h"
 
 static void skeleton_daemon()
 {
@@ -64,7 +65,6 @@ static void skeleton_daemon()
     }
 
     /* Open the log file */
-    openlog ("firstdaemon", LOG_PID, LOG_DAEMON);
 }
 
 int main()
@@ -74,13 +74,12 @@ int main()
     while (1)
     {
         //TODO: Insert daemon code here.
-        syslog (LOG_NOTICE, "First daemon started.");
+        Log ( "First daemon started.");
         sleep (20);
         break;
     }
 
-    syslog (LOG_NOTICE, "First daemon terminated.");
-    closelog();
+    Log ( "First daemon terminated.");
 
     return EXIT_SUCCESS;
 }

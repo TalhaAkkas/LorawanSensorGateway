@@ -58,9 +58,9 @@ uint8_t sock = SOCKET0;
 //////////////////////////////////////////////
 uint8_t power = 15;
 uint32_t frequency = 868100000;
-char spreading_factor[] = "sf12";
+char spreading_factor[] = "sf7";
 char coding_rate[] = "4/5";
-uint16_t bandwidth = 500;
+uint16_t bandwidth = 11000;
 char crc_mode[] = "on";
 //////////////////////////////////////////////
 
