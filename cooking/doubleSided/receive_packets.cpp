@@ -412,6 +412,7 @@ void didRecieveTestStartMessage(char* payload)
   int min = atoi(strsep(&payload, "A"));
   int sec = atoi(strsep(&payload, "A"));
 
+  time_t rawtime;
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
 
@@ -426,6 +427,7 @@ void didRecieveTestEndMessage(char* payload)
   int min = atoi(strsep(&payload, "A"));
   int sec = atoi(strsep(&payload, "A"));
 
+  time_t rawtime;
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
 
@@ -441,6 +443,7 @@ void didRecieveTestSampleMessage(char* payload)
   int min = atoi(strsep(&payload, "A"));
   int sec = atoi(strsep(&payload, "A"));
 
+  time_t rawtime;
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
     time_t t = time(NULL);
