@@ -413,7 +413,9 @@ void didRecieveTestStartMessage(char* payload)
   int sec = atoi(strsep(&payload, "A"));
 
   time_t rawtime;
-    time ( &rawtime );
+  struct tm * timeinfo;
+
+  time ( &rawtime );
     timeinfo = localtime ( &rawtime );
 
     time_t t = time(NULL);
@@ -428,6 +430,8 @@ void didRecieveTestEndMessage(char* payload)
   int sec = atoi(strsep(&payload, "A"));
 
   time_t rawtime;
+  struct tm * timeinfo;
+  
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
 
@@ -444,6 +448,7 @@ void didRecieveTestSampleMessage(char* payload)
   int sec = atoi(strsep(&payload, "A"));
 
   time_t rawtime;
+  struct tm * timeinfo;
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
     time_t t = time(NULL);
