@@ -457,7 +457,7 @@ void didRecieveTestSampleMessage(char* payload)
 }
 void processMessage(char* message)
 {
-  char* typeString = strsep(&stringp, "T");
+  char* typeString = strsep(&message, "T");
   MessageType type = atoi(typeString);
 
   if(type == PinponMessage){
