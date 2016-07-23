@@ -29,7 +29,8 @@
 
 #include "arduPiLoRaWAN.h"
 #include "log.h"
-
+#include <stdio.h>      /* puts, printf */
+#include <time.h>  
 typedef enum {
   PinponMessage,
   TestStartMessage,
