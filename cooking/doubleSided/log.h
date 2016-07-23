@@ -6,4 +6,5 @@ extern int LogCreated;      // keeps track whether the log file is created or no
  
 void Log (char *message);    // logs a message to LOGFILE
 void LogErr (char *message); // logs a message; execution is interrupted
-char[] getLogLine();
+
+void LogWithFormat(const char* format, ...);
