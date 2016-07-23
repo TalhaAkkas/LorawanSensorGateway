@@ -431,7 +431,7 @@ void didRecieveTestEndMessage(char* payload)
 
   time_t rawtime;
   struct tm * timeinfo;
-  
+
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
 
@@ -458,11 +458,9 @@ void didRecieveTestSampleMessage(char* payload)
 void processMessage(char* message)
 {
   char* typeString = strsep(&message, "T");
-  MessageType type = atoi(typeString);
+  MessageType type = (MessageType) atoi(typeString);
 
-  if(type == PinponMessage){
-    didRecievePinponMessage(message);
-  }else if(type == TestStartMessage){
+  if(type == TestStartMessage){
     didRecieveTestStartMessage(message);
   }else if(type == TestEndMessage){
     didRecieveTestEndMessage(message);
