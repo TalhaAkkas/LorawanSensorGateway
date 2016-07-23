@@ -66,7 +66,7 @@ static void skeleton_daemon()
 
     /* Open the log file */
 }
-
+/*
 int main()
 {
     skeleton_daemon();
@@ -83,3 +83,4 @@ int main()
 
     return EXIT_SUCCESS;
 }
+*/
