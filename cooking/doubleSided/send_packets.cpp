@@ -30,6 +30,31 @@
 #include "arduPiLoRaWAN.h"
 #include "log.h"
 
+
+
+typedef enum {
+  PinponMessage,
+  TestStartMessage,
+  TestAckMessage,
+  TestEndMessage,
+  TestResultMessage,
+  TestSampleMessage,
+  ConfigurationMessage,
+  ConfigurationAcceptMessage,
+  AliveMessage
+}MessageType;
+typedef enum {
+  MessageRecieved,
+  MessageCreated,
+  TestAckNotRecieved,
+  TestAckRecieved,
+  TestEndNotRecieved,
+  TestEndRecieved,
+  TestSampleRecieved,
+  IdleForLongTime 
+}EventTypes;
+
+
 // socket to use
 //////////////////////////////////////////////
 uint8_t sock = SOCKET0;
