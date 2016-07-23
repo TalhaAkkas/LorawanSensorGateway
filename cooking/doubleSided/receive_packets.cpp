@@ -28,6 +28,7 @@
  */
 
 #include "arduPiLoRaWAN.h"
+#include "log.h"
 
 // socket to use
 //////////////////////////////////////////////
@@ -374,16 +375,17 @@ uint8_t radioModuleSetup()
 
 void setupArguments(int argc, char *argv[]){
   power = atoi(argv[0]);
-  frequency = argv[1];
-  spreading_factor[] = argv[2];
-  coding_rate[] = argv[3];
-  bandwidth = argv[4];
-  crc_mode[] = argv[5];
+  frequency = atoi(argv[1]);
+  spreading_factor = argv[2];
+  coding_rate = argv[3];
+  bandwidth = atoi(argv[4]);
+  crc_mode = argv[5];
 
 }
-void didReceivePinponMessage(char* payload)
+
+void didRecieveTestStartMessage(char* payload)
 {
-  int messageIndex = atoi(strsep(&payload, "A"));
+  int testId = atoi(strsep(&payload, "A"));
   int hour = atoi(strsep(&payload, "A"));
   int min = atoi(strsep(&payload, "A"));
   int sec = atoi(strsep(&payload, "A"));
@@ -393,7 +395,35 @@ void didReceivePinponMessage(char* payload)
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-  LogWithFormat("|DidReceivePinPon| index> %d ftime> %d:%d:%d ttime> %d:%d:%d ", messageIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  LogWithFormat("|DidReceiveTestStart| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+}
+void didRecieveTestEndMessage(char* payload)
+{
+  int testId = atoi(strsep(&payload, "A"));
+  int hour = atoi(strsep(&payload, "A"));
+  int min = atoi(strsep(&payload, "A"));
+  int sec = atoi(strsep(&payload, "A"));
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+  LogWithFormat("|DidReceiveTestAck| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+}
+void didRecieveTestSampleMessage(char* payload)
+{
+  int testId = atoi(strsep(&payload, "A"));
+  int testIndex = atoi(strsep(&payload, "A"));
+  int hour = atoi(strsep(&payload, "A"));
+  int min = atoi(strsep(&payload, "A"));
+  int sec = atoi(strsep(&payload, "A"));
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+  LogWithFormat("|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, testIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 void processMessage(char* message)
 {
@@ -415,7 +445,7 @@ void processMessage(char* message)
 // Main loop setup() and loop() declarations
 //////////////////////////////////////////////
 
-int main (){
+int main (int argc, char *argv[]){
   setupArguments(argc, argv);
 	setup();
 	while(1){

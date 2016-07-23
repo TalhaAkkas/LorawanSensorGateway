@@ -369,11 +369,11 @@ uint8_t radioModuleSetup()
 
 void setupArguments(int argc, char *argv[]){
   power = atoi(argv[0]);
-  frequency = argv[1];
-  spreading_factor[] = argv[2];
-  coding_rate[] = argv[3];
-  bandwidth = argv[4];
-  crc_mode[] = argv[5];
+  frequency = atoi(argv[1]);
+  spreading_factor = argv[2];
+  coding_rate = argv[3];
+  bandwidth = atoi(argv[4]);
+  crc_mode = argv[5];
 
 }
 //////////////////////////////////////////////
