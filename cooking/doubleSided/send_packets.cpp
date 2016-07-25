@@ -32,18 +32,6 @@
 #include <stdio.h>      /* puts, printf */
 #include <time.h>  
 
-int main (int argc, char *argv[]);
-void setupArguments(int argc, char *argv[]);
-char* generateTestSampleMessage(int testId, int testIndex);
-char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs);
-char* generateTestEndMessage(int testId);
-char* generateTestStartMessage(int testId);
-uint8_t radioModuleSetup();
-void loop();
-void setup();
-
-
-
 
 typedef enum {
   PinponMessage,
@@ -81,7 +69,7 @@ char spreading_factor[] = "sf12";
 char coding_rate[] = "4/5";
 uint16_t bandwidth = 125;
 char crc_mode[] = "on";
-long int delayTime = 100;
+int delayTime = 100;
 int testId = 0;
 //////////////////////////////////////////////
 
@@ -89,7 +77,7 @@ int testId = 0;
 uint8_t radioModuleSetup(void);
 
 // define data to send
-char* data;
+char data[] = "0102030405060708090A0B0C0D0E0F";
 
 // variable
 uint8_t error;
@@ -115,7 +103,8 @@ void setup()
 }
 
 static int call = 0;
-char* getTestData(){
+char* getTestData()
+{
 
 
 }
@@ -123,7 +112,7 @@ void loop()
 {
   // Send packet
   if(call == 0){
-    data = generateTestStartMessage(testId);
+    data = generateTestStartMessage(testId)
   }else if (call < 21){
     data = generateTestSampleMessage(testId, call - 1);
   }else if(call == 22){
@@ -423,7 +412,7 @@ uint8_t radioModuleSetup()
 
 char* generateTestStartMessage(int testId)
 {
-  char* data = (char*)  malloc(sizeof(char) * 30);
+  char[] data = malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -437,7 +426,7 @@ char* generateTestStartMessage(int testId)
 }
 char* generateTestEndMessage(int testId)
 {
-  char* data = (char*) malloc(sizeof(char) * 30);
+  char[] data = malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -451,7 +440,7 @@ char* generateTestEndMessage(int testId)
 }
 char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs)
 {
-  char* data = (char*) malloc(sizeof(char) * 30);
+  char[] data = malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -465,7 +454,7 @@ char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedP
 }
 char* generateTestSampleMessage(int testId, int testIndex)
 {
-  char* data = (char*) malloc(sizeof(char) * 30);
+  char[] data = malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -477,22 +466,26 @@ char* generateTestSampleMessage(int testId, int testIndex)
   
   sprintf(data, "%dT%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
-void setupArguments(int argc, char *argv[]){
+void setupArguments(int argc, char *argv[])
+{
   power = atoi(argv[0]);
   frequency = atoi(argv[1]);
   bandwidth = atoi(argv[4]);
-  delayTime = (long int) atoi(argv[6]);
-  testId = atoi(argv[7]);
+  delayTime = atoi(argv[6]);
+  testId = atoi(argv[7])
   strcpy(spreading_factor, argv[2]);
   strcpy(coding_rate, argv[3]);
   strcpy(crc_mode, argv[5]);
+
+  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, dt %d, testId %d", power, frequency, coding_rate, bandwidth, delayTime, testId);
 
 }
 //////////////////////////////////////////////
 // Main loop setup() and loop() declarations
 //////////////////////////////////////////////
 
-int main (int argc, char *argv[]){
+int main (int argc, char *argv[])
+{
   setupArguments(argc, argv);
 	setup();
 	while(1){
