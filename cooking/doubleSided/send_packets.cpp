@@ -471,15 +471,14 @@ void loop()
   }
 
 
-  char* t = dataPayload;
-  count = sprintf(dataPayload, "%s", data);
-  t += count;
-  while(count < len)
+  int index = sprintf(dataPayload, "%s", data);
+  while(index < len)
   {
-  *t++ = 'A';
+      dataPayload[index] = 'A';
+      index++;
   }
-  *t = '\0';
-  
+  dataPayload[index] = '\0';
+
   printf("%s\n",dataPayload);
   error = LoRaWAN.sendRadio(dataPayload);
   
