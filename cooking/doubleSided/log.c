@@ -3,8 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "log.h"
+#include <stdarg.h>
  
 int LogCreated = 0;
+
+int getLogLineSize(void);
 
 void LogWithFormat(const char* format, ...)
 {
@@ -12,14 +15,14 @@ void LogWithFormat(const char* format, ...)
     va_list args;
     va_start(args, format);
 
-    if(priority & PRIO_LOG){
-    	char[] logLine = malloc(sizeof(char) * getLogLineSize());
+//    if(priority & PRIO_LOG){
+    	char* logLine = (char*) malloc(sizeof(char) * getLogLineSize());
 
-    	snprintf(logLine, getLogLineSize(), format args);
+    	snprintf(logLine, getLogLineSize(), format, args);
     	Log(logLine);
 
 		free(logLine);
-    }
+//    }
 
     va_end(args);
 
@@ -53,7 +56,7 @@ void Log (char *message)
 void LogErr (char *message)
 {
 	Log(message);
-	Log("\n");
+//	Log("\n");
 }
 
 int getLogLineSize()

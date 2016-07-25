@@ -111,6 +111,8 @@ if [ "$1" != "-clean" ]; then
       "$ARDUPIAPI_DIR/arduPiUtils.o" \
       "$ARDUPIAPI_DIR/arduPiMultiprotocol.o" \
       "$ARDUPI_DIR/arduPi.o" \
+      "log.c" \
+      -I"loh.h"\
       -I"$ARDUPI_DIR" \
       -I"$ARDUPIAPI_DIR" \
       -I"$LIBRARY_DIR" \
