@@ -457,7 +457,7 @@ void didRecieveTestSampleMessage(char* payload)
 }
 void processMessage(char* message)
 {
-  char* typeString = strsep(&message, "T");
+  char* typeString = strsep(&message, "F");
   MessageType type = (MessageType) atoi(typeString);
 
   if(type == TestStartMessage){

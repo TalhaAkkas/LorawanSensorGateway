@@ -387,7 +387,7 @@ char* generateTestStartMessage(int testId)
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dT%dA%dA%dA%dA", TestStartMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(data, "%dF%dA%dA%dA%dA", TestStartMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
   return data;
 }
 char* generateTestEndMessage(int testId)
@@ -402,7 +402,7 @@ char* generateTestEndMessage(int testId)
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dT%dA%dA%dA%dA", TestEndMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(data, "%dF%dA%dA%dA%dA", TestEndMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
   return data;
 }
 char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs)
@@ -417,7 +417,7 @@ char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedP
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dT%dA%dA%dA%dA", TestEndMessage, testId, isAllInRightOrder, recievedPacketCount, totalTimeInSecs);
+  sprintf(data, "%dF%dA%dA%dA%dA", TestEndMessage, testId, isAllInRightOrder, recievedPacketCount, totalTimeInSecs);
   return data;
 }
 char* generateTestSampleMessage(int testId, int testIndex)
@@ -432,7 +432,7 @@ char* generateTestSampleMessage(int testId, int testIndex)
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dT%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(data, "%dF%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
   return data;
 }
 void setupArguments(int argc, char *argv[]){
@@ -472,12 +472,13 @@ void loop()
 
 
   int index = sprintf(dataPayload, "%s", data);
+  /*
   while(index < len)
   {
       dataPayload[index] = 'A';
       index++;
   }
-  dataPayload[index] = '\0';
+  dataPayload[index] = '\0';*/
 
   printf("%s\n",dataPayload);
   error = LoRaWAN.sendRadio(dataPayload);
