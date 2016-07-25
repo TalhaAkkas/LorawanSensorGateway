@@ -77,7 +77,7 @@ int testId = 0;
 uint8_t radioModuleSetup(void);
 
 // define data to send
-char* data;
+char dataPayload[31];
 
 // variable
 uint8_t error;
@@ -459,6 +459,7 @@ static int call = 0;
 void loop() 
 {
   // Send packet
+  char* data; 
   if(call == 0){
     data = generateTestStartMessage(testId);
   }else if (call < 21){
@@ -468,8 +469,10 @@ void loop()
   }else{
     exit(0);
   }
-  printf(data);
-  error = LoRaWAN.sendRadio(data);
+  printf("%s\n",data);
+
+  sprintf(dataPayload, "%-30s", data);
+  error = LoRaWAN.sendRadio(dataPayload);
   
   // Check status
   if (error == 0)
