@@ -447,7 +447,7 @@ void loop()
   char* data; 
   if(call == 0){
     data = generateTestStartMessage(testId);
-  }else if (call < 21){
+  }else if (call < 22){
     data = generateTestSampleMessage(testId, call - 1);
   }else if(call == 22){
     data = generateTestEndMessage(testId);
