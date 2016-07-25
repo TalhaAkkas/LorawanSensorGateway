@@ -77,7 +77,7 @@ int testId = 0;
 uint8_t radioModuleSetup(void);
 
 // define data to send
-char dataPayload[31];
+char dataPayload[] = "0102030405060708090A0B0C0D0E0F";
 
 // variable
 uint8_t error;
@@ -470,7 +470,7 @@ void loop()
     exit(0);
   }
 
-  sprintf(dataPayload, "%-30s", data);
+  sprintf(dataPayload, "%s", data);
   printf("%s\n",dataPayload);
   error = LoRaWAN.sendRadio(dataPayload);
   
