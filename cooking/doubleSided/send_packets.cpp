@@ -412,7 +412,7 @@ uint8_t radioModuleSetup()
 
 char* generateTestStartMessage(int testId)
 {
-  char* data =  malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -426,7 +426,7 @@ char* generateTestStartMessage(int testId)
 }
 char* generateTestEndMessage(int testId)
 {
-  char* data =  malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -440,7 +440,7 @@ char* generateTestEndMessage(int testId)
 }
 char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs)
 {
-  char* data = malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -454,7 +454,7 @@ char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedP
 }
 char* generateTestSampleMessage(int testId, int testIndex)
 {
-  char* data =  malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -469,7 +469,7 @@ char* generateTestSampleMessage(int testId, int testIndex)
 void setupArguments(int argc, char *argv[]){
  
   power = atoi(argv[1]);
-  frequency = atoi(argv[2]);
+  //frequency = atoi(argv[2]);
   strcpy(spreading_factor, argv[3]);
   strcpy(coding_rate, argv[4]);
   bandwidth = atoi(argv[5]);
@@ -477,7 +477,7 @@ void setupArguments(int argc, char *argv[]){
   delayTime = atoi(argv[7]);
   testId = atoi(argv[8]);
 
-  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
+  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d \n", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
 
 }
 //////////////////////////////////////////////

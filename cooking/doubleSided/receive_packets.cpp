@@ -412,7 +412,7 @@ void didRecieveTestStartMessage(char* payload)
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-  LogWithFormat("|DidReceiveTestStart| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  LogWithFormat("|DidReceiveTestStart| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 void didRecieveTestEndMessage(char* payload)
 {
@@ -429,7 +429,7 @@ void didRecieveTestEndMessage(char* payload)
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-  LogWithFormat("|DidReceiveTestAck| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  LogWithFormat("|DidReceiveTestAck| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 void didRecieveTestSampleMessage(char* payload)
 {
@@ -445,7 +445,7 @@ void didRecieveTestSampleMessage(char* payload)
   timeinfo = localtime ( &rawtime );
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
-  LogWithFormat("|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, testIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  LogWithFormat("|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, testIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 void processMessage(char* message)
 {
@@ -464,7 +464,7 @@ void processMessage(char* message)
 void setupArguments(int argc, char *argv[]){
  
   power = atoi(argv[1]);
-  frequency = atoi(argv[2]);
+  //frequency = atoi(argv[2]);
   strcpy(spreading_factor, argv[3]);
   strcpy(coding_rate, argv[4]);
   bandwidth = atoi(argv[5]);
@@ -472,7 +472,7 @@ void setupArguments(int argc, char *argv[]){
   delayTime = atoi(argv[7]);
   testId = atoi(argv[8]);
 
-  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
+  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d \n", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
 
 }
 //////////////////////////////////////////////
