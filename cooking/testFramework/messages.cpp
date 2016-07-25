@@ -152,6 +152,21 @@ void didRecieveTestEndMessage(char* payload)
 	LogWithFormat("|DidReceiveTestAck| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
 	FireEvent(TestEndRecieved, testId);
 }
+
+char* generateTestSampleMessage(int testId, int testIndex)
+{
+  char[] data = malloc(sizeof(char) * 30);
+  time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  
+  sprintf(data, "%dT%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
+}
 void didRecieveTestSampleMessage(char* payload)
 {
 	int testId = atoi(strsep(&payload, "A"));

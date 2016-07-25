@@ -401,8 +401,7 @@ void setupArguments(int argc, char *argv[]){
   bandwidth = atoi(argv[4]);
   strcpy(spreading_factor, argv[2]);
   strcpy(coding_rate, argv[3]);
-  strcpy(crc_mode, argv[4]);
-
+  strcpy(crc_mode, argv[5]);
 }
 
 void didRecieveTestStartMessage(char* payload)
@@ -449,10 +448,10 @@ void didRecieveTestSampleMessage(char* payload)
 
   time_t rawtime;
   struct tm * timeinfo;
-    time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
   LogWithFormat("|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d ttime> %d:%d:%d ", testId, testIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
 void processMessage(char* message)

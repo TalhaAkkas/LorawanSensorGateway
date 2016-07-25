@@ -20,7 +20,8 @@ void LogWithFormat(const char* format, ...)
 
     	snprintf(logLine, getLogLineSize(), format, args);
     	Log(logLine);
-
+    	printf(logLine);
+    	
 		free(logLine);
 //    }
 

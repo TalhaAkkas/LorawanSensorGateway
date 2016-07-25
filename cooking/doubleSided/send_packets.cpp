@@ -69,6 +69,8 @@ char spreading_factor[] = "sf12";
 char coding_rate[] = "4/5";
 uint16_t bandwidth = 125;
 char crc_mode[] = "on";
+int delay = 100;
+int testId = 0;
 //////////////////////////////////////////////
 
 // define functions
@@ -100,10 +102,23 @@ void setup()
 
 }
 
+static int call = 0;
+char* getTestData(){
 
+
+}
 void loop() 
 {
   // Send packet
+  if(call == 0){
+    data = generateTestStartMessage(testId)
+  }else if (call < 21){
+    data = generateTestSampleMessage(testId, call - 1);
+  }else if(call == 22){
+    data = generateTestEndMessage(testId);
+  }else{
+    exit(0);
+  }
   error = LoRaWAN.sendRadio(data);
   
   // Check status
@@ -116,7 +131,8 @@ void loop()
     printf("Error waiting for packets. error = %d\n", error);  
   }
   
-  delay(5000);
+  delay(delay);
+  call++;
 }
 
 
@@ -393,13 +409,71 @@ uint8_t radioModuleSetup()
   return status;
 }
 
+char* generateTestStartMessage(int testId)
+{
+  char[] data = malloc(sizeof(char) * 30);
+  time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  
+  sprintf(data, "%dT%dA%dA%dA%dA", TestStartMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+}
+char* generateTestEndMessage(int testId)
+{
+  char[] data = malloc(sizeof(char) * 30);
+  time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  
+  sprintf(data, "%dT%dA%dA%dA%dA", TestEndMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+}
+char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs)
+{
+  char[] data = malloc(sizeof(char) * 30);
+  time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  
+  sprintf(data, "%dT%dA%dA%dA%dA", TestEndMessage, testId, isAllInRightOrder, recievedPacketCount, totalTimeInSecs);
+}
+char* generateTestSampleMessage(int testId, int testIndex)
+{
+  char[] data = malloc(sizeof(char) * 30);
+  time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  
+  sprintf(data, "%dT%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
+}
 void setupArguments(int argc, char *argv[]){
   power = atoi(argv[0]);
   frequency = atoi(argv[1]);
   bandwidth = atoi(argv[4]);
+  delay = atoi(argv[6]);
+  testId = atoi(argv[7])
   strcpy(spreading_factor, argv[2]);
   strcpy(coding_rate, argv[3]);
-  strcpy(crc_mode, argv[4]);
+  strcpy(crc_mode, argv[5]);
 
 }
 //////////////////////////////////////////////
