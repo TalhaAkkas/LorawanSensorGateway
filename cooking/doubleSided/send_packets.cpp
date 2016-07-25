@@ -417,7 +417,7 @@ char* generateTestSampleMessage(int testId, int testIndex)
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dF%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(data, "%dF%dA%dA%dA%dA%dA", TestSampleMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
   return data;
 }
 void setupArguments(int argc, char *argv[]){

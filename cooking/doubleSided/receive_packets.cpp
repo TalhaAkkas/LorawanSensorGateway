@@ -411,7 +411,7 @@ void didRecieveTestEndMessage(char* payload)
   char logLine [getLogLineSize()];
   snprintf(logLine, getLogLineSize(), "|DidReceiveTestEnd| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
   Log(logLine);
-  exit();
+  exit(0);
 }
 void didRecieveTestSampleMessage(char* payload)
 {
@@ -480,7 +480,7 @@ void loop()
     printf("--> Packet received ");
     printf("packet: %s\n", (char*) LoRaWAN._buffer);
     printf("length: %u\n", LoRaWAN._length);
-    processMessage(LoRaWAN._buffer);
+    processMessage((char*)LoRaWAN._buffer);
   }
   else 
   {
