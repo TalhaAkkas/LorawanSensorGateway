@@ -50,8 +50,8 @@ void Log (char *message)
 		fclose(file);
 	}
  	
-	if (file)
-		fclose(file);
+	//if (file)
+		//fclose(file);
 }
  
 void LogErr (char *message)
