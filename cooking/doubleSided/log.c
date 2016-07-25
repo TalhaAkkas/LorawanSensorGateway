@@ -33,7 +33,7 @@ void Log (char *message)
 	FILE *file;
  
 	if (!LogCreated) {
-		file = fopen(LOGFILE, "w");
+		file = fopen(LOGFILE, "a");
 		LogCreated = 1;
 	}
 	else		
