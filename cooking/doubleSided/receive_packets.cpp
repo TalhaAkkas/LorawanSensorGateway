@@ -396,20 +396,6 @@ uint8_t radioModuleSetup()
 int delayTime;
 int testId;
 
-void setupArguments(int argc, char *argv[]){
- 
-  power = atoi(argv[0]);
-  frequency = atoi(argv[1]);
-  bandwidth = atoi(argv[4]);
-  delayTime = atoi(argv[6]);
-  testId = atoi(argv[7]);
-  strcpy(spreading_factor, argv[2]);
-  strcpy(coding_rate, argv[3]);
-  strcpy(crc_mode, argv[5]);
-
-  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, dt %d, testId %d", power, frequency, coding_rate, bandwidth, delayTime, testId);
-
-}
 
 void didRecieveTestStartMessage(char* payload)
 {
@@ -475,6 +461,20 @@ void processMessage(char* message)
   }
 }
 
+void setupArguments(int argc, char *argv[]){
+ 
+  power = atoi(argv[0]);
+  frequency = atoi(argv[1]);
+  bandwidth = atoi(argv[4]);
+  delayTime = atoi(argv[6]);
+  testId = atoi(argv[7]);
+  strcpy(spreading_factor, argv[2]);
+  strcpy(coding_rate, argv[3]);
+  strcpy(crc_mode, argv[5]);
+
+  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, dt %d, testId %d", power, frequency, coding_rate, bandwidth, delayTime, testId);
+
+}
 //////////////////////////////////////////////
 // Main loop setup() and loop() declarations
 //////////////////////////////////////////////

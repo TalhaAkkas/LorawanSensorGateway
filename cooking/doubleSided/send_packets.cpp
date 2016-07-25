@@ -466,18 +466,18 @@ char* generateTestSampleMessage(int testId, int testIndex)
   
   sprintf(data, "%dT%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
 }
-void setupArguments(int argc, char *argv[])
-{
-  power = atoi(argv[0]);
-  frequency = atoi(argv[1]);
-  bandwidth = atoi(argv[4]);
-  delayTime = atoi(argv[6]);
-  testId = atoi(argv[7]);
-  strcpy(spreading_factor, argv[2]);
-  strcpy(coding_rate, argv[3]);
-  strcpy(crc_mode, argv[5]);
+void setupArguments(int argc, char *argv[]){
+ 
+  power = atoi(argv[1]);
+  frequency = atoi(argv[2]);
+  strcpy(spreading_factor, argv[3]);
+  strcpy(coding_rate, argv[4]);
+  bandwidth = atoi(argv[5]);
+  strcpy(crc_mode, argv[6]);
+  delayTime = atoi(argv[7]);
+  testId = atoi(argv[8]);
 
-  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, dt %d, testId %d", power, frequency, coding_rate, bandwidth, delayTime, testId);
+  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
 
 }
 //////////////////////////////////////////////
