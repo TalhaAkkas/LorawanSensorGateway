@@ -412,7 +412,9 @@ void didRecieveTestStartMessage(char* payload)
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-  LogWithFormat("|DidReceiveTestStart| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  char logLine [getLogLineSize()];
+  snprintf(logLine, getLogLineSize(), "|DidReceiveTestStart| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  Log(logLine);
 }
 void didRecieveTestEndMessage(char* payload)
 {
@@ -429,7 +431,9 @@ void didRecieveTestEndMessage(char* payload)
 
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-  LogWithFormat("|DidReceiveTestAck| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  char logLine [getLogLineSize()];
+  snprintf(logLine, getLogLineSize(), "|DidReceiveTestAck| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  Log(logLine);
 }
 void didRecieveTestSampleMessage(char* payload)
 {
@@ -445,7 +449,11 @@ void didRecieveTestSampleMessage(char* payload)
   timeinfo = localtime ( &rawtime );
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
-  LogWithFormat("|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, testIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+
+
+  char logLine [getLogLineSize()];
+  snprintf(logLine, getLogLineSize(), "|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, testIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  Log(logLine);
 }
 void processMessage(char* message)
 {
@@ -472,8 +480,9 @@ void setupArguments(int argc, char *argv[]){
   delayTime = atoi(argv[7]);
   testId = atoi(argv[8]);
 
-  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d \n", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
-
+  char logLine [getLogLineSize()];
+  snprintf(logLine, getLogLineSize(), "|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d \n", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
+  Log(logLine);
 }
 //////////////////////////////////////////////
 // Main loop setup() and loop() declarations

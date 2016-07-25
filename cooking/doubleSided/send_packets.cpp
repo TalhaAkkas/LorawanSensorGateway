@@ -477,8 +477,9 @@ void setupArguments(int argc, char *argv[]){
   delayTime = atoi(argv[7]);
   testId = atoi(argv[8]);
 
-  LogWithFormat("|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d \n", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
-
+  char logLine [getLogLineSize()];
+  snprintf(logLine, getLogLineSize(), "|SETCONFIG| p %d, f %d, sf %s, cr %s, bw %d, crc %s, dt %d, testId %d \n", power, frequency, spreading_factor, coding_rate, bandwidth, crc_mode, delayTime, testId);
+  Log(logLine);
 }
 //////////////////////////////////////////////
 // Main loop setup() and loop() declarations

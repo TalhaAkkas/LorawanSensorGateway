@@ -8,7 +8,7 @@
 int LogCreated = 0;
 
 int getLogLineSize(void);
-
+/*
 void LogWithFormat(const char* format, ...)
 {
 
@@ -26,9 +26,10 @@ void LogWithFormat(const char* format, ...)
 
     va_end(args);
 
-}
+}*/
 void Log (char *message)
 {
+	printf(message);
 	FILE *file;
  
 	if (!LogCreated) {
