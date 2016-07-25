@@ -31,7 +31,8 @@
 #include "log.h"
 #include <stdio.h>      /* puts, printf */
 #include <time.h> 
-#include <sys\timeb.h>  
+#include <sys/timeb.h>
+ 
 typedef enum {
   PinponMessage,
   TestStartMessage,
