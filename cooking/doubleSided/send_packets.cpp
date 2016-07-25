@@ -377,6 +377,8 @@ uint8_t radioModuleSetup()
 
 char* generateTestStartMessage(int testId)
 {
+  struct timeb start;
+  ftime(&start);
   char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
@@ -387,11 +389,13 @@ char* generateTestStartMessage(int testId)
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dF%dA%dA%dA%dA", TestStartMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(data, "%dF%dA%dA%dA%dA%uA", TestStartMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec, start.millitm);
   return data;
 }
 char* generateTestEndMessage(int testId)
 {
+  struct timeb start;
+  ftime(&start);
   char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
@@ -402,11 +406,13 @@ char* generateTestEndMessage(int testId)
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dF%dA%dA%dA%dA", TestEndMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(data, "%dF%dA%dA%dA%dA%uA", TestEndMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec, start.millitm);
   return data;
 }
 char* generateTestSampleMessage(int testId, int testIndex)
 {
+  struct timeb start;
+  ftime(&start);
   char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
@@ -417,7 +423,7 @@ char* generateTestSampleMessage(int testId, int testIndex)
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   
-  sprintf(data, "%dF%dA%dA%dA%dA%dA", TestSampleMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(data, "%dF%dA%dA%dA%dA%dA%uA", TestSampleMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec, start.millitm);
   return data;
 }
 void setupArguments(int argc, char *argv[]){

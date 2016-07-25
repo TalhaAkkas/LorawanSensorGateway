@@ -30,7 +30,8 @@
 #include "arduPiLoRaWAN.h"
 #include "log.h"
 #include <stdio.h>      /* puts, printf */
-#include <time.h>  
+#include <time.h> 
+#include <sys\timeb.h>  
 typedef enum {
   PinponMessage,
   TestStartMessage,
@@ -380,17 +381,20 @@ void didRecieveTestStartMessage(char* payload)
   int hour = atoi(strsep(&payload, "A"));
   int min = atoi(strsep(&payload, "A"));
   int sec = atoi(strsep(&payload, "A"));
+  int mili = atoi(strsep(&payload, "A"));
 
+  struct timeb start;
+  ftime(&start);
   time_t rawtime;
   struct tm * timeinfo;
-
   time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
 
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
+
   char logLine [getLogLineSize()];
-  snprintf(logLine, getLogLineSize(), "|DidReceiveTestStart| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  snprintf(logLine, getLogLineSize(), "|DidReceiveTestStart| testId> %d ftime> %d:%d:%d|%u ttime> %d:%d:%d|%u  \n", testId, hour, min, sec, mili, tm.tm_hour, tm.tm_min, tm.tm_sec, start.millitm);
   Log(logLine);
 }
 void didRecieveTestEndMessage(char* payload)
@@ -399,17 +403,20 @@ void didRecieveTestEndMessage(char* payload)
   int hour = atoi(strsep(&payload, "A"));
   int min = atoi(strsep(&payload, "A"));
   int sec = atoi(strsep(&payload, "A"));
+  int mili = atoi(strsep(&payload, "A"));
 
+  struct timeb start;
+  ftime(&start);
   time_t rawtime;
   struct tm * timeinfo;
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
 
-    time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
 
-    time_t t = time(NULL);
-    struct tm tm = *localtime(&t);
   char logLine [getLogLineSize()];
-  snprintf(logLine, getLogLineSize(), "|DidReceiveTestEnd| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  snprintf(logLine, getLogLineSize(), "|DidReceiveTestEnd| testId> %d ftime> %d:%d:%d|%u ttime> %d:%d:%d|%u  \n", testId, hour, min, sec, mili, tm.tm_hour, tm.tm_min, tm.tm_sec, start.millitm);
   Log(logLine);
   exit(0);
 }
@@ -420,7 +427,10 @@ void didRecieveTestSampleMessage(char* payload)
   int hour = atoi(strsep(&payload, "A"));
   int min = atoi(strsep(&payload, "A"));
   int sec = atoi(strsep(&payload, "A"));
+  int mili = atoi(strsep(&payload, "A"));
 
+  struct timeb start;
+  ftime(&start);
   time_t rawtime;
   struct tm * timeinfo;
   time ( &rawtime );
@@ -430,7 +440,7 @@ void didRecieveTestSampleMessage(char* payload)
 
 
   char logLine [getLogLineSize()];
-  snprintf(logLine, getLogLineSize(), "|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, testIndex, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  snprintf(logLine, getLogLineSize(), "|DidReceiveTestSample| testId> %d index: %d ftime> %d:%d:%d|%u ttime> %d:%d:%d|%u  \n", testId, testIndex, hour, min, sec, mili, tm.tm_hour, tm.tm_min, tm.tm_sec, start.millitm);
   Log(logLine);
 }
 void processMessage(char* message)
