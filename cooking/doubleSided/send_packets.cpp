@@ -102,41 +102,6 @@ void setup()
 
 }
 
-static int call = 0;
-char* getTestData()
-{
-
-
-}
-void loop() 
-{
-  // Send packet
-  if(call == 0){
-    data = generateTestStartMessage(testId)
-  }else if (call < 21){
-    data = generateTestSampleMessage(testId, call - 1);
-  }else if(call == 22){
-    data = generateTestEndMessage(testId);
-  }else{
-    exit(0);
-  }
-  error = LoRaWAN.sendRadio(data);
-  
-  // Check status
-  if (error == 0)
-  {
-    printf("--> Packet sent OK\n");
-  }
-  else 
-  {
-    printf("Error waiting for packets. error = %d\n", error);  
-  }
-  
-  delay(delayTime);
-  call++;
-}
-
-
 /***********************************************************************************
 *
 * radioModuleSetup()
@@ -484,6 +449,36 @@ void setupArguments(int argc, char *argv[]){
 //////////////////////////////////////////////
 // Main loop setup() and loop() declarations
 //////////////////////////////////////////////
+
+
+static int call = 0;
+void loop() 
+{
+  // Send packet
+  if(call == 0){
+    data = generateTestStartMessage(testId)
+  }else if (call < 21){
+    data = generateTestSampleMessage(testId, call - 1);
+  }else if(call == 22){
+    data = generateTestEndMessage(testId);
+  }else{
+    exit(0);
+  }
+  error = LoRaWAN.sendRadio(data);
+  
+  // Check status
+  if (error == 0)
+  {
+    printf("--> Packet sent OK\n");
+  }
+  else 
+  {
+    printf("Error waiting for packets. error = %d\n", error);  
+  }
+  
+  delay(delayTime);
+  call++;
+}
 
 int main (int argc, char *argv[])
 {
