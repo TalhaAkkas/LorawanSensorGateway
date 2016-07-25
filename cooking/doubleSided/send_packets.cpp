@@ -456,7 +456,7 @@ void loop()
 {
   // Send packet
   if(call == 0){
-    data = generateTestStartMessage(testId)
+    data = generateTestStartMessage(testId);
   }else if (call < 21){
     data = generateTestSampleMessage(testId, call - 1);
   }else if(call == 22){
