@@ -412,7 +412,7 @@ uint8_t radioModuleSetup()
 
 char* generateTestStartMessage(int testId)
 {
-  char[] data = malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -426,7 +426,7 @@ char* generateTestStartMessage(int testId)
 }
 char* generateTestEndMessage(int testId)
 {
-  char[] data = malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -440,7 +440,7 @@ char* generateTestEndMessage(int testId)
 }
 char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs)
 {
-  char[] data = malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
@@ -454,7 +454,7 @@ char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedP
 }
 char* generateTestSampleMessage(int testId, int testIndex)
 {
-  char[] data = malloc(sizeof(char) * 30);
+  char* data = (char*) malloc(sizeof(char) * 30);
   time_t rawtime;
   struct tm * timeinfo;
 
