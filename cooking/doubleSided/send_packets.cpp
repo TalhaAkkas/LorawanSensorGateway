@@ -405,21 +405,6 @@ char* generateTestEndMessage(int testId)
   sprintf(data, "%dF%dA%dA%dA%dA", TestEndMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
   return data;
 }
-char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs)
-{
-  char* data = (char*) malloc(sizeof(char) * 30);
-  time_t rawtime;
-  struct tm * timeinfo;
-
-  time ( &rawtime );
-  timeinfo = localtime ( &rawtime );
-
-  time_t t = time(NULL);
-  struct tm tm = *localtime(&t);
-  
-  sprintf(data, "%dF%dA%dA%dA%dA", TestEndMessage, testId, isAllInRightOrder, recievedPacketCount, totalTimeInSecs);
-  return data;
-}
 char* generateTestSampleMessage(int testId, int testIndex)
 {
   char* data = (char*) malloc(sizeof(char) * 30);
@@ -472,13 +457,6 @@ void loop()
 
 
   int index = sprintf(dataPayload, "%s", data);
-  /*
-  while(index < len)
-  {
-      dataPayload[index] = 'A';
-      index++;
-  }
-  dataPayload[index] = '\0';*/
 
   printf("%s\n",dataPayload);
   error = LoRaWAN.sendRadio(dataPayload);

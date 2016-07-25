@@ -94,29 +94,6 @@ void setup()
 }
 
 
-void loop() 
-{
-  
-  printf("\nListening to packets...\n");
-  
-   // rx
-  error = LoRaWAN.receiveRadio(10000);
-  
-  // Check status
-  if (error == 0)
-  {
-    printf("--> Packet received ");
-    printf("packet: %s\n", (char*) LoRaWAN._buffer);
-    printf("length: %u\n", LoRaWAN._length);
-  }
-  else 
-  {
-    // error code
-    //  1: error
-    //  2: no incoming packet
-    printf("Error waiting for packets. error = %d\n", error);  
-  }  
-}
 
 
 
@@ -432,8 +409,9 @@ void didRecieveTestEndMessage(char* payload)
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
   char logLine [getLogLineSize()];
-  snprintf(logLine, getLogLineSize(), "|DidReceiveTestAck| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  snprintf(logLine, getLogLineSize(), "|DidReceiveTestEnd| testId> %d ftime> %d:%d:%d ttime> %d:%d:%d  \n", testId, hour, min, sec, tm.tm_hour, tm.tm_min, tm.tm_sec);
   Log(logLine);
+  exit();
 }
 void didRecieveTestSampleMessage(char* payload)
 {
@@ -488,6 +466,30 @@ void setupArguments(int argc, char *argv[]){
 // Main loop setup() and loop() declarations
 //////////////////////////////////////////////
 
+void loop() 
+{
+  
+  printf("\nListening to packets...\n");
+  
+   // rx
+  error = LoRaWAN.receiveRadio(10000);
+  
+  // Check status
+  if (error == 0)
+  {
+    printf("--> Packet received ");
+    printf("packet: %s\n", (char*) LoRaWAN._buffer);
+    printf("length: %u\n", LoRaWAN._length);
+    processMessage(LoRaWAN._buffer);
+  }
+  else 
+  {
+    // error code
+    //  1: error
+    //  2: no incoming packet
+    printf("Error waiting for packets. error = %d\n", error);  
+  }  
+}
 int main (int argc, char *argv[]){
   setupArguments(argc, argv);
 	setup();
