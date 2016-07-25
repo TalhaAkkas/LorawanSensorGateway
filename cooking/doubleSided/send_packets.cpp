@@ -469,9 +469,9 @@ void loop()
   }else{
     exit(0);
   }
-  printf("%s\n",data);
 
   sprintf(dataPayload, "%-30s", data);
+  printf("%s\n",dataPayload);
   error = LoRaWAN.sendRadio(dataPayload);
   
   // Check status
