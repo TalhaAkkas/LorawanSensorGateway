@@ -464,6 +464,7 @@ void loop()
   }else{
     exit(0);
   }
+  pirntf(data);
   error = LoRaWAN.sendRadio(data);
   
   // Check status
@@ -473,7 +474,7 @@ void loop()
   }
   else 
   {
-    printf("Error waiting for packets. error = %d\n", error);  
+    printf("Error sending packets. error = %d\n", error);  
   }
   
   delay(delayTime);
