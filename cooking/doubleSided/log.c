@@ -16,13 +16,12 @@ void LogWithFormat(const char* format, ...)
     va_start(args, format);
 
 //    if(priority & PRIO_LOG){
-    	char* logLine = (char*) malloc(sizeof(char) * getLogLineSize());
+    	char logLine [getLogLineSize()];
 
     	snprintf(logLine, getLogLineSize(), format, args);
     	Log(logLine);
-    	printf(logLine);
+    	printf("%s", logLine);
     	
-		free(logLine);
 //    }
 
     va_end(args);
