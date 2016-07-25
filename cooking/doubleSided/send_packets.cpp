@@ -388,6 +388,7 @@ char* generateTestStartMessage(int testId)
   struct tm tm = *localtime(&t);
   
   sprintf(data, "%dT%dA%dA%dA%dA", TestStartMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  return data;
 }
 char* generateTestEndMessage(int testId)
 {
@@ -402,6 +403,7 @@ char* generateTestEndMessage(int testId)
   struct tm tm = *localtime(&t);
   
   sprintf(data, "%dT%dA%dA%dA%dA", TestEndMessage, testId, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  return data;
 }
 char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedPacketCount, int totalTimeInSecs)
 {
@@ -416,6 +418,7 @@ char* generateTestResultMessage(int testId, int isAllInRightOrder, int recievedP
   struct tm tm = *localtime(&t);
   
   sprintf(data, "%dT%dA%dA%dA%dA", TestEndMessage, testId, isAllInRightOrder, recievedPacketCount, totalTimeInSecs);
+  return data;
 }
 char* generateTestSampleMessage(int testId, int testIndex)
 {
@@ -430,6 +433,7 @@ char* generateTestSampleMessage(int testId, int testIndex)
   struct tm tm = *localtime(&t);
   
   sprintf(data, "%dT%dA%dA%dA%dA%dA", TestStartMessage, testId, testIndex, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  return data;
 }
 void setupArguments(int argc, char *argv[]){
  
