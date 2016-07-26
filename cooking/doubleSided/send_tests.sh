@@ -8,7 +8,7 @@ for pw in ${power_levels[*]}; do
 	for sf in ${sfs[*]}; do
 		for bw in ${bws[*]}; do
 			for del in ${delays[*]}; do
-				sudo ./send_packets.cpp_exe "$pw" 868100000 "$sf" 4/5 "$bw" on del "$1"
+				sudo ./send_packets.cpp_exe "$pw" 868100000 "$sf" 4/5 "$bw" on "$del" "$1"
 				sleep 1
 			done
 		done
